@@ -1,18 +1,20 @@
 import express, { json } from 'express'
+import db from './database.js'
 
 const app = express()
 
 app.use(express.json())
 
-const notes = [{
-    id:1,
-    title:"First note",
-    content:"Agora sim estamos vendo algo que digitei aqui que ninguem liga pqp",
-}]
+// const notes = [{
+//     id:1,
+//     title:"First note",
+//     content:"Agora sim estamos vendo algo que digitei aqui que ninguem liga pqp",
+// }]
 const port = 3000;
 
 //GET
 app.get('/notes', (req,res) =>{
+    const notes = db.prepare('SELECT * FROM notes').all()
     res.json(notes)
 })
 
