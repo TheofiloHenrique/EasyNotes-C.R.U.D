@@ -20,7 +20,7 @@ app.get('/notes/:id', (req,res) =>{
         SELECT * FROM notes WHERE id = ?
     `).get(id);
 
-    if (!note) return res.status(404).json({ error: 'Note Not Found!'});
+    if (!note) return res.status(404).json({ error: 'Nota No Encontrada!'});
     
     res.json(note);
 })
@@ -31,7 +31,7 @@ app.post('/notes',(req,res)=>{
 
     if (!title?.trim() || !content?.trim()) {
         return res.status(400).json({
-            error: 'Título e conteúdo são obrigatórios'
+            error: 'Título y contenido son obligatorios'
         });
     }
 
@@ -54,7 +54,7 @@ app.put('/notes/:id', (req, res) =>{
 
     if (!title?.trim() || !content?.trim()) {
         return res.status(400).json({
-            error: 'Título e conteúdo são obrigatórios'
+            error: 'Título y contenido son obligatorios'
         });
     }
 
@@ -64,7 +64,7 @@ app.put('/notes/:id', (req, res) =>{
         WHERE id = ?
     `).run(title, content, id)
 
-    if (result.changes === 0) return res.status(404).json({error: 'Note Not Found!'});
+    if (result.changes === 0) return res.status(404).json({error: 'Nota No Encontrada!'});
     
     const note = db.prepare(`
         SELECT * FROM notes WHERE id = ?
@@ -81,9 +81,9 @@ app.delete('/notes/:id', (req, res) => {
         DELETE FROM notes WHERE id = ?
     `).run(id)
 
-    if (result.changes === 0) return res.status(404).json({error: 'Note Not Found!'})
+    if (result.changes === 0) return res.status(404).json({error: 'Nota No Encontrada!'})
     
     res.status(204).send()
 })
 
-app.listen(port, () => console.log(`Motores ligados na porta ${port}! xD`))
+app.listen(port, () => console.log(`Motores conectados en la puerta ${port}! xD`))
